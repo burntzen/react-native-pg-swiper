@@ -55,10 +55,15 @@ var styles = StyleSheet.create({
     fontWeight: 'bold',
   }
 })
+
+changePage(index) {
+  this.refs.swiper.changePage(index);
+}
+
 class Swiper extends React.Component {
   render() {
     return (
-      <Swiper style={styles.wrapper}>
+      <Swiper ref='swiper' style={styles.wrapper}>
         <View style={styles.slide1}>
           <Text style={styles.text}>Hello Swiper</Text>
         </View>
@@ -88,7 +93,12 @@ AppRegistry.registerComponent('swiper', () => Swiper);
 | activeDotColor | `blue` | `string` | CSS color of the dot for the current page. |
 | threshold | `25` | `number` | Threshold before the swiper captures the pan responder |
 | disableLastSwipe | `false` | `boolean` | Disable Swipe effect on start and end page |
+| ref | `` | `string` | Give Reference to Swiper to use changePage method |
 
+#### method
+| Prop  | params  | Type | Description |
+| :------------ |:---------------:| :---------------:| :-----|
+| changePage | index | `function` | Change To Particular Page. Usage this.refs.swiper.changePage(index); |
 
 ### Examples
 

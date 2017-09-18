@@ -16,7 +16,7 @@ export default class Swiper extends Component {
     index: React.PropTypes.number,
     threshold: React.PropTypes.number,
     pager: React.PropTypes.bool,
-    disableLastSwipe: React.PropTypes.disableLastSwipe,
+    disableLastSwipe: React.PropTypes.bool,
     onPageChange: React.PropTypes.func,
     activeDotColor: React.PropTypes.string,
   };
@@ -90,6 +90,11 @@ export default class Swiper extends Component {
         }
       }
     });
+
+    this.changePage = (index) => {
+      index = index || 0;
+      this.goToPage(index);
+    }
   }
 
   goToPage(pageNumber) {
