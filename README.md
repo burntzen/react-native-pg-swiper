@@ -1,4 +1,4 @@
-# react-native-page-swiper
+# react-native-pg-swiper
 
 Page Swiper component for React Native.
 
@@ -8,42 +8,25 @@ Page Swiper component for React Native.
 - [Basic Usage](#basic-usage)
 - [Properties](#properties)
 - [Examples](#examples)
-- [Development](#development)
 
 ### Installation
 
 ```bash
-$ npm i react-native-page-swiper --save
+$ npm i react-native-pg-swiper --save
+```
+
+```bash
+$ yarn add react-native-pg-swiper
 ```
 
 ### Basic Usage
 
-- Install `react-native` first
-
-```bash
-$ npm i react-native -g
-```
-
-- Initialization of a react-native project
-
-```bash
-$ react-native init myproject
-```
-
-- Then, edit `myproject/index.ios.js`, like this:
+- Edit your `app.js`, like this:
 
 ```jsx
-var Swiper = require('react-native-page-swiper')
-// es6
-// import Swiper from 'react-native-page-swiper'
-
-var React = require('react-native');
-var {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-} = React;
+import React from 'react';
+import Swiper from 'react-native-pg-swiper';
+import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
 var styles = StyleSheet.create({
   wrapper: {
@@ -72,28 +55,27 @@ var styles = StyleSheet.create({
     fontWeight: 'bold',
   }
 })
-
-var swiper = React.createClass({
-  render: function() {
+class Swiper extends React.Component {
+  render() {
     return (
       <Swiper style={styles.wrapper}>
         <View style={styles.slide1}>
           <Text style={styles.text}>Hello Swiper</Text>
         </View>
-        
+
         <View style={styles.slide2}>
           <Text style={styles.text}>Beautiful</Text>
         </View>
-        
+
         <View style={styles.slide3}>
           <Text style={styles.text}>And simple</Text>
         </View>
       </Swiper>
-    )
+    );
   }
-})
+}
 
-AppRegistry.registerComponent('swiper', () => swiper)
+AppRegistry.registerComponent('swiper', () => Swiper);
 ```
 
 ### Properties
@@ -105,14 +87,9 @@ AppRegistry.registerComponent('swiper', () => swiper)
 | onPageChange |  | `function` | Callback when page changes. |
 | activeDotColor | `blue` | `string` | CSS color of the dot for the current page. |
 | threshold | `25` | `number` | Threshold before the swiper captures the pan responder |
+| disableLastSwipe | `false` | `boolean` | Disable Swipe effect on start and end page |
 
 
 ### Examples
 
-See code in [examples](https://github.com/fixt/react-native-page-swiper/tree/master/examples/swiper).
-
-## Questions
-
-Feel free to [contact us](mailto:code@fixt.co) or [create an issue](https://github.com/fixt/react-native-page-swiper/issues/new)
-
-> Inspired by [leecade/react-native-swiper](https://github.com/leecade/react-native-swiper/) & [brentvatne/react-native-scrollable-tab-view](https://github.com/brentvatne/react-native-scrollable-tab-view).
+See code in [examples](https://github.com/wadehrarshpreet/react-native-pg-swiper/tree/master/examples/swiper).

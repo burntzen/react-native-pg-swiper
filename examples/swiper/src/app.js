@@ -1,5 +1,5 @@
-import React, { Component, Dimensions, StyleSheet, Text, View } from 'react-native'
-import Swiper from 'react-native-page-swiper'
+import React, { Component, Dimensions, StyleSheet, Text, View } from 'react-native';
+import Swiper from 'react-native-pg-swiper';
 
 export default class SwiperExample extends Component {
   render() {

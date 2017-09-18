@@ -4,7 +4,7 @@
  */
 'use strict';
 
-import Examples from './src/examples'
+import Examples from './src/app'
 
 import React, { AppRegistry } from 'react-native'
 

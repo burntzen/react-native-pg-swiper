@@ -16,6 +16,7 @@ export default class Swiper extends Component {
     index: React.PropTypes.number,
     threshold: React.PropTypes.number,
     pager: React.PropTypes.bool,
+    disableLastSwipe: React.PropTypes.disableLastSwipe,
     onPageChange: React.PropTypes.func,
     activeDotColor: React.PropTypes.string,
   };
@@ -26,6 +27,7 @@ export default class Swiper extends Component {
     threshold: 25,
     onPageChange: () => {},
     activeDotColor: 'blue',
+    disableLastSwipe: false
   };
 
   constructor(props) {
@@ -45,12 +47,15 @@ export default class Swiper extends Component {
 
       let newIndex = this.state.index;
 
-      if (relativeGestureDistance < -0.5 || (relativeGestureDistance < 0 && vx <= -0.5)) {
-        newIndex = newIndex + 1;
-      } else if (relativeGestureDistance > 0.5 || (relativeGestureDistance > 0 && vx >= 0.5)) {
-        newIndex = newIndex - 1;
+      if (relativeGestureDistance < -0.25 || (relativeGestureDistance < 0 && vx <= -0.25)) {
+          if (this.state.index < this.props.children.length - 1) { // make sure it is not the last page before incrementing
+            newIndex += 1;
+          }
+      } else if (relativeGestureDistance > 0.25 || (relativeGestureDistance > 0 && vx >= 0.25)) {
+        if (this.state.index > 0) { // make sure it is not the first page before decrementing
+            newIndex -= 1;
+        }
       }
-
       this.goToPage(newIndex);
     };
 
@@ -78,9 +83,11 @@ export default class Swiper extends Component {
       // Dragging, move the view with the touch
       onPanResponderMove: (e, gestureState) => {
         let dx = gestureState.dx;
-        let offsetX = -dx / this.state.viewWidth + this.state.index;
-
-        this.state.scrollValue.setValue(offsetX);
+        let index = this.state.index;
+        let offsetX = -dx / this.state.viewWidth + index;
+        if(!this.props.disableLastSwipe || (index !== 0 && this.props.children.length - 1 !== index)) {
+          this.state.scrollValue.setValue(offsetX);
+        }
       }
     });
   }
