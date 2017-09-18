@@ -7,8 +7,8 @@ import {
   PanResponder,
   View,
 } from 'react-native';
-
 import Dots from './dots';
+
 
 export default class Swiper extends Component {
   static propTypes = {
@@ -58,6 +58,16 @@ export default class Swiper extends Component {
       }
       this.goToPage(newIndex);
     };
+    this.disableSwipe = [];
+    if( this.props.disableLastSwipe ) {
+      this.disableSwipe = [{
+        index: 0,
+        notLeft: true
+      }, {
+        index: this.props.children.length - 1,
+        notRight: true
+      }];
+    }
 
     this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponder: (e, gestureState) => {
@@ -85,8 +95,13 @@ export default class Swiper extends Component {
         let dx = gestureState.dx;
         let index = this.state.index;
         let offsetX = -dx / this.state.viewWidth + index;
-        if(!this.props.disableLastSwipe || (index !== 0 && this.props.children.length - 1 !== index)) {
+        if (this.disableSwipe.length === 0 || (index > 0 && index < this.props.children.length - 1)) {
           this.state.scrollValue.setValue(offsetX);
+        } else {
+          let selectedObject = this.disableSwipe[index > 0 ? 1:0];
+          if (!(selectedObject.notLeft && offsetX < 0) && !(selectedObject.notRight && offsetX > 1)) {
+            this.state.scrollValue.setValue(offsetX);
+          }
         }
       }
     });

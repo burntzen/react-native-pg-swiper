@@ -8,7 +8,7 @@
     "ios",
     "android"
   ],
-  "version": "0.3.12",
+  "version": "0.3.121",
   "description": "Page Swiper component for React Native.",
   "main": "src/index.js",
   "engines": {
@@ -33,5 +33,6 @@
     "eslint": "^1.10.3",
     "eslint-config-fixt": "^1.0.1",
     "eslint-plugin-react": "^3.16.1"
-  }
+  },
+  "dependencies": {}
 }
